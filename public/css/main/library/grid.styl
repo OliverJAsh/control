@@ -1,0 +1,64 @@
+grid($breakpoint = false, $grid-gutter-width = $base-gutter-width)
+  if $breakpoint
+    $breakpoint = 'b' + $breakpoint + '-'
+
+  .{$breakpoint}line,
+  .{$breakpoint}last-unit
+    clearfix()
+
+    .lt-ie7 &
+      overflow visible
+      zoom 1
+
+  .{$breakpoint}line
+    margin-left ($grid-gutter-width * -1)
+
+  .{$breakpoint}unit
+    border-box()
+    float left
+    padding-left $grid-gutter-width
+
+  .{$breakpoint}unit-right
+    float right
+
+  .{$breakpoint}size-1-of-1
+   float none
+
+  .{$breakpoint}size-1-of-2
+    width 50%
+
+  .{$breakpoint}size-1-of-3
+    width 33.33333%
+
+  .{$breakpoint}size-2-of-3
+    width 66.66666%
+
+  .{$breakpoint}size-1-of-4
+    width 25%
+
+  .{$breakpoint}size-3-of-4
+    width 75%
+
+  .{$breakpoint}size-1-of-5
+    width 20%
+
+  .{$breakpoint}size-1-of-6
+    width 16.6666667%
+
+  .{$breakpoint}size-2-of-5
+    width 40%
+
+  .{$breakpoint}size-3-of-5
+    width 60%
+
+  .{$breakpoint}size-4-of-5
+    width 80%
+
+  .{$breakpoint}last-unit
+    float none
+    width auto
+
+    .lt-ie7 &
+      position relative
+      left -3px
+      margin-right -3px

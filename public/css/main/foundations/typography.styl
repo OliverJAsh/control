@@ -1,0 +1,59 @@
+body
+  establish-baseline()
+  text-rendering optimizeLegibility
+  // This might cause problems with web fonts, so be cautious.
+  -webkit-font-smoothing antialiased
+
+.left-text
+  text-align left
+
+.centered-text
+  text-align center
+
+.right-text
+  text-align right
+
+.text
+  // Enable this when debugging vertical rhythm to display a baseline overlay.
+  debug-vertical-alignment()
+
+  &,
+  a
+    color black
+
+  // Force all elements to inherit the font (inherit is not supported in older
+  // IE).
+  &,
+  input,
+  select
+    font-family 'Arial', serif
+
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6
+    font-family 'Helvetica', Arial, sans-serif
+    font-weight bold
+
+  .h1
+    vertical-rhythm(2)
+
+  .h2
+    vertical-rhythm(1.6)
+
+  .h3
+    vertical-rhythm(1.2)
+
+  .h4, .h5, .h6
+    trailer()
+
+  blockquote,
+  p,
+  pre,
+  dl,
+  menu,
+  ol,
+  ul
+    vertical-rhythm()

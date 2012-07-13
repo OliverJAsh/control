@@ -1,0 +1,27 @@
+.form-row
+  trailer()
+  display block
+  font-weight bold
+
+.form-error
+  font-weight bold
+  background-color hsl(360,50%,40%)
+  background-image linear-gradient(top, hsla(0, 0%, 100%, 0.2), transparent)
+  margin-left $base-gutter-width * -1
+  margin-right $base-gutter-width * -1
+  padding-left $base-gutter-width
+  padding-right $base-gutter-width
+
+input,
+textarea,
+select
+  border-box()
+  margin-right ($base-gutter-width / 2)
+
+select
+  width 100%
+
+.multi-selection,
+.lt-ie8
+  select
+    width auto !important

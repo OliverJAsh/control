@@ -1,44 +1,50 @@
 !!! 5
-html(lang='en')
-  head
-    block head
-      meta(charset='utf-8')
-      meta(name='description', content=properties.description)
-      meta(name='keywords', content=properties.keyWords)
-    
-      //- SITE INFORMATION
-      title=page.title
 
-    block styles
-      //- CSS
-      link(rel='stylesheet', type='text/css', href=versionPath('/css/main/index.css'), media='all')
+//- http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+| <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+| <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+| <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+| <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 
+head
+  block head
+    meta(charset='utf-8')
+    meta(name='description', content=properties.description)
+    meta(name='keywords', content=properties.keyWords)
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    meta(name='viewport', content='width=device-width, user-scalable=0')
+
+    title=page.title
+
+  //- Replace our HTML no-js class to js
+  //- Simple HTML5 shim
+  //- http://paulirish.com/2009/avoiding-the-fouc-v3/
+  script
+    (function(H, C){H.className=H.className.replace(/\bno-js\b/,'js');C('header');C('nav');C('section');C('article');C('aside');C('footer');C('hgroup');})(document.documentElement, document.createElement);
+
+  block styles
+    //- Mobile-first CSS!
+    //- Base styles for all browsers
+    link(rel='stylesheet', href=versionPath('/css/main/base.css'))
+    //- Layout styles for browsers that support media queries
+    link(rel='stylesheet', href=versionPath('/css/main/screen.css'), media='(min-width:320px)')
+    //- A shim to get layout styles in browsers that do not support media queries
+    //if (lt IE 9) & (!IEMobile)
+      link(rel='stylesheet', href=versionPath('/css/main/screen-ie.css'))
+
+body
+  block body
+
+  block scripts
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
     script
-      document.getElementsByTagName('html')[0].setAttribute('class', 'js');
+      //- If the CDN doesn't work, load it in for ourselves.
+      if (typeof jQuery === 'undefined') {
+        document.write('<script src="/js/jquery-1.7.2.min.js" />');
+      }
 
-  body(class=page.section)
+    - if (typeof compactJsHtml !== 'undefined')
+        !=compactJsHtml()
 
-    each bodyStart in includes.bodyStart
-      !=partial(bodyStart)
-
-    #container
-      block header
-        include includes/header
-
-      block nav
-        include includes/nav
-      
-      #main-content
-        block content
-
-      block footer
-        include includes/footer
-
-    block script
-      script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-      script
-        if (typeof jQuery === 'undefined') {
-          document.write('<script src="/js/jquery-1.7.2.min.js" />');
-        }
-      - if (typeof compactJsHtml !== 'undefined')
-          !=compactJsHtml()
+| </html>

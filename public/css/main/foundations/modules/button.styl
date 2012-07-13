@@ -1,0 +1,21 @@
+.button
+  border-box()
+  vertical-rhythm(1.5, 2, 0)
+  width 100%
+  display block
+  border-radius 3px
+  box-shadow inset 0 1px 1px hsl(351,42%,56%)
+  background-color hsl(350,53%,44%)
+  background-image linear-gradient(top, hsla(255,255,255,0.1), transparent)
+  color white
+
+  .lt-ie8 &
+    // Full width button breaks the column layout in IE6 for some reason
+    centered()
+    width 50%
+
+  &:hover
+    background-color hsl(350,53%,34%)
+
+  &:active
+    box-shadow inset 0 1px 5px hsla(0, 0%, 0%, 0.5)

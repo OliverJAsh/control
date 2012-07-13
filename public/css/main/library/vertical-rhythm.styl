@@ -1,0 +1,49 @@
+// ----- Functions ----- //
+
+rhythm($to-size = 1, $font-unit = 1em)
+  $font-unit * ($base-line-height / $to-size)
+
+// ----- Mixins ----- //
+
+baseline-grid-background($baseline-color)
+  &:after
+    content ''
+    display block
+    position absolute
+    top 0
+    right 0
+    bottom 0
+    left 0
+    pointer-events none
+    background-image linear-gradient(top, $baseline-color 1px, transparent 1px)
+    background-size 100% rhythm()
+
+establish-baseline($font-size = $base-font-size, $line-height = $base-line-height)
+  // Normalise body font-size
+  // em measures are relative to this
+  font-size $font-size
+  line-height $line-height
+
+debug-vertical-alignment($baseline-color = black)
+  baseline-grid-background($baseline-color)
+  position relative
+
+vertical-rhythm($font-size = 1, $lines = 1, $margin-bottom = 1)
+  font-size ($font-size * 1em)
+  line-height (($base-line-height * $lines) / $font-size)
+  if ($margin-bottom)
+    margin-bottom (rhythm($font-size) * $margin-bottom)
+  else
+    margin-bottom 0
+
+leader($lines = 1, $font-size = 1)
+  margin-top ($lines * rhythm($font-size))
+
+trailer($lines = 1, $font-size = 1)
+  margin-bottom ($lines * rhythm($font-size))
+
+padding-leader($lines = 1, $font-size = 1)
+  padding-top ($lines * rhythm($font-size))
+
+padding-trailer($lines = 1, $font-size = 1)
+  padding-bottom ($lines * rhythm($font-size))
