@@ -13,7 +13,7 @@ head
     meta(name='keywords', content=properties.keyWords)
     meta(name='apple-mobile-web-app-capable', content='yes')
     meta(name='apple-mobile-web-app-status-bar-style', content='black')
-    meta(name='viewport', content='width=device-width, user-scalable=0')
+    meta(name='viewport', content='width=device-width, user-scalable=no')
 
     title=page.title
 
@@ -21,7 +21,7 @@ head
   //- Simple HTML5 shim
   //- http://paulirish.com/2009/avoiding-the-fouc-v3/
   script
-    (function(H, C){H.className=H.className.replace(/\bno-js\b/,'js');C('header');C('nav');C('section');C('article');C('aside');C('footer');C('hgroup');})(document.documentElement, document.createElement);
+    (function(d){d.documentElement.className = d.documentElement.className.replace(/\bno-js\b/, 'js');d.createElement('header');d.createElement('nav');d.createElement('section');d.createElement('article');d.createElement('aside');d.createElement('footer');d.createElement('hgroup');})(document);
 
   block styles
     //- Mobile-first CSS!
