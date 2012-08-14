@@ -1,50 +1,54 @@
 !!! 5
-
 //- http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
-| <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-| <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-| <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-| <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+//if lt IE 7
+  <html class='ie6' lang='en'>
+//if IE 7
+  <html class='ie7' lang='en'>
+//if IE 8
+  <html class='ie8' lang='en'>
+//if IE 9
+  <html class='ie9' lang='en'>
+//[if gt IE 8]><!
+html(lang='en')
+  //<![endif]
 
-head
-  block head
-    meta(charset='utf-8')
-    meta(name='description', content=properties.description)
-    meta(name='keywords', content=properties.keyWords)
-    meta(name='apple-mobile-web-app-capable', content='yes')
-    meta(name='apple-mobile-web-app-status-bar-style', content='black')
-    meta(name='viewport', content='width=device-width, user-scalable=no')
+  head
+    block head
+      meta(charset='utf-8')
+      meta(name='description', content=properties.description)
+      meta(name='keywords', content=properties.keyWords)
+      meta(name='apple-mobile-web-app-capable', content='yes')
+      meta(name='apple-mobile-web-app-status-bar-style', content='black')
+      meta(name='viewport', content='width=device-width, user-scalable=no')
 
-    title=page.title
+      title=page.title
 
-  //- Replace our HTML no-js class to js
-  //- Simple HTML5 shim
-  //- http://paulirish.com/2009/avoiding-the-fouc-v3/
-  script
-    (function(d){d.documentElement.className = d.documentElement.className.replace(/\bno-js\b/, 'js');d.createElement('header');d.createElement('nav');d.createElement('section');d.createElement('article');d.createElement('aside');d.createElement('footer');d.createElement('hgroup');})(document);
-
-  block styles
-    //- Mobile-first CSS!
-    //- Base styles for all browsers
-    link(rel='stylesheet', href=versionPath('/css/main/base.css'))
-    //- Layout styles for browsers that support media queries
-    link(rel='stylesheet', href=versionPath('/css/main/screen.css'), media='(min-width:320px)')
-    //- A shim to get layout styles in browsers that do not support media queries
-    //if (lt IE 9) & (!IEMobile)
-      link(rel='stylesheet', href=versionPath('/css/main/screen-ie.css'))
-
-body
-  block body
-
-  block scripts
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-    //- If the CDN doesn't work, load it in for ourselves.
+    //- Replace our HTML no-js class to js
+    //- Simple HTML5 shim
+    //- http://paulirish.com/2009/avoiding-the-fouc-v3/
     script
-      if (typeof jQuery === 'undefined') {
-        document.write('<script src="/js/jquery-1.7.2.min.js" />');
-      }
+      (function(d){d.documentElement.className = d.documentElement.className.replace(/\bno-js\b/, 'js');d.createElement('header');d.createElement('nav');d.createElement('section');d.createElement('article');d.createElement('aside');d.createElement('footer');d.createElement('hgroup');})(document);
 
-    - if (typeof compactJsHtml !== 'undefined')
-        !=compactJsHtml()
+    block styles
+      //- Mobile-first CSS!
+      //- Base styles for all browsers
+      link(rel='stylesheet', href=versionPath('/css/main/base.css'))
+      //- Layout styles for browsers that support media queries
+      link(rel='stylesheet', href=versionPath('/css/main/screen.css'), media='(min-width:320px)')
+      //- A shim to get layout styles in browsers that do not support media queries
+      //if (lt IE 9) & (!IEMobile)
+        link(rel='stylesheet', href=versionPath('/css/main/screen-ie.css'))
 
-| </html>
+  body
+    block body
+
+    block scripts
+      script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+      //- If the CDN doesn't work, load it in for ourselves.
+      script
+        if (typeof jQuery === 'undefined') {
+          document.write('<script src="/js/jquery-1.7.2.min.js" />');
+        }
+
+      - if (typeof compactJsHtml !== 'undefined')
+          !=compactJsHtml()
